@@ -1,0 +1,24 @@
+{
+  "name": "movie-ticket-api-gateway",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "OVERRIDE_DEFAULT_LOGGER=false && nodemon src/server.js --exec babel-node -e js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.8.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "graphql": "^16.5.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.3.8"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.13.*",
+    "@babel/core": "7.13.*",
+    "@babel/node": "7.13.*",
+    "@babel/preset-env": "7.13.*",
+    "nodemon": "2.0.*"
+  }
+}
