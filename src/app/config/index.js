@@ -9,4 +9,5 @@ export const {
   URL_USER_SERVICE,
   URL_RESERVATION_SERVICE,
   URL_SHOWTIME_SERVICE,
+  JWT_SECRET,
 } = process.env
