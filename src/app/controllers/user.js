@@ -1,6 +1,4 @@
-import userService from '../services/user'
-
-const getUserList = async () => {
+const getUserList = async (userService) => {
   try {
     const response = await userService.getUserList()
     return response
@@ -10,7 +8,7 @@ const getUserList = async () => {
   }
 }
 
-const getUserByID = async (id) => {
+const getUserByID = async (userService, id) => {
   try {
     const response = await userService.getUserByID(id)
     return response
@@ -19,41 +17,23 @@ const getUserByID = async (id) => {
   }
 }
 
-const getUserByEmail = async (email) => {
+const getUserByEmail = async (userService, email) => {
   try {
     const response = await userService.getUserByEmail(email)
-    return response
+    return response[0]
   } catch (error) {
     console.log(error)
   }
 }
 
-const createUser = async (userData) => {
+const createUser = async (userService, userData) => {
   try {
-    const response = await userService.createUser({ ...userData })
+    const response = await userService.createUser(userData)
     return response
   } catch (error) {
     console.log(error)
   }
 }
-
-// const updateUser = async (id, userData) => {
-//   try {
-//     const response = await userService.updateUser(id, { ...userData })
-//     return response
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// const deleteUser = async (id) => {
-//   try {
-//     const response = await userService.deleteUser(id)
-//     return response
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
 
 export default {
   getUserList,

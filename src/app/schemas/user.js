@@ -1,3 +1,4 @@
+import { AuthenticationError } from 'apollo-server-express'
 import bcrypt from 'bcrypt'
 import JWTtoken from 'jsonwebtoken'
 import userController from '../controllers/user'
@@ -31,20 +32,20 @@ const mutations = `
 
 const resolvers = {
   Query: {
-    me: async (_, args, { user }) => {
-      if (!user) throw new Error('You are not authenticated!')
-      const { data } = await userController.getUserByID(user._id)
-      return data
+    me: async (_, args, { dataSources, user }) => {
+      if (!user) throw new AuthenticationError('You must be logged in')
+      return await userController.getUserByID(dataSources.userService, user._id)
     },
   },
 
   Mutation: {
-    register: async (_, { input }) => {
+    register: async (_, { input }, { dataSources }) => {
       const { email, password } = input
 
-      if (password.length < 8) throw new Error('Password not secure enough!')
+      if (password.length < 8)
+        throw new Error('Password must be at least 8 characters long')
 
-      const user = await userController.createUser({
+      const user = await userController.createUser(dataSources.userService, {
         email,
         password: await bcrypt.hash(password, 10),
       })
@@ -53,24 +54,27 @@ const resolvers = {
 
       return {
         token: JWTtoken.sign(
-          { _id: user.data._id, email: user.data.email },
+          { _id: user._id, email: user.email },
           process.env.JWT_SECRET,
           { expiresIn: '1 day' }
         ),
       }
     },
-    login: async (_, { input }) => {
+    login: async (_, { input }, { dataSources }) => {
       const { email, password } = input
 
-      const user = await userController.getUserByEmail(email)
+      const user = await userController.getUserByEmail(
+        dataSources.userService,
+        email
+      )
       if (!user) throw new Error('No user by that email!')
 
-      const valid = await bcrypt.compare(password, user.data.password)
+      const valid = await bcrypt.compare(password, user.password)
       if (!valid) throw new Error('Incorrect password')
 
       return {
         token: JWTtoken.sign(
-          { _id: user.data._id, email: user.data.email },
+          { _id: user._id, email: user.email },
           process.env.JWT_SECRET,
           { expiresIn: '1 day' }
         ),
