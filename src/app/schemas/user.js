@@ -50,8 +50,6 @@ const resolvers = {
         password: await bcrypt.hash(password, 10),
       })
 
-      // TODO : Handle user already created message received from service
-
       return {
         token: JWTtoken.sign(
           { _id: user._id, email: user.email },
@@ -67,7 +65,7 @@ const resolvers = {
         dataSources.userService,
         email
       )
-      if (!user) throw new Error('No user by that email!')
+      if (!user) throw new Error('No user by that email')
 
       const valid = await bcrypt.compare(password, user.password)
       if (!valid) throw new Error('Incorrect password')

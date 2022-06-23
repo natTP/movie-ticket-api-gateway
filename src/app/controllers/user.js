@@ -3,8 +3,8 @@ const getUserList = async (userService) => {
     const response = await userService.getUserList()
     return response
   } catch (error) {
-    // TODO : Handle error
-    console.log(error)
+    // TODO : how to make error message show here
+    throw error
   }
 }
 
@@ -13,7 +13,7 @@ const getUserByID = async (userService, id) => {
     const response = await userService.getUserByID(id)
     return response
   } catch (error) {
-    console.log(error)
+    throw error
   }
 }
 
@@ -22,7 +22,7 @@ const getUserByEmail = async (userService, email) => {
     const response = await userService.getUserByEmail(email)
     return response[0]
   } catch (error) {
-    console.log(error)
+    throw error
   }
 }
 
@@ -31,7 +31,7 @@ const createUser = async (userService, userData) => {
     const response = await userService.createUser(userData)
     return response
   } catch (error) {
-    console.log(error)
+    throw error
   }
 }
 
