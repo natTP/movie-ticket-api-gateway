@@ -16,6 +16,12 @@ const apolloServer = new ApolloServer({
       user: req.auth,
     }
   },
+  formatError: (error) => {
+    if (error.message === '400: Bad Request') {
+      return new Error(error.extensions.response.body.errors[0].msg)
+    }
+    return error
+  },
 })
 
 async function startServer() {

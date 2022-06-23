@@ -33,7 +33,7 @@ const mutations = `
 const resolvers = {
   Query: {
     me: async (_, args, { dataSources, user }) => {
-      if (!user) throw new AuthenticationError('You must be logged in')
+      if (!user) throw new AuthenticationError('You must be logged in.')
       return await userController.getUserByID(dataSources.userService, user._id)
     },
   },
@@ -43,7 +43,7 @@ const resolvers = {
       const { email, password } = input
 
       if (password.length < 8)
-        throw new Error('Password must be at least 8 characters long')
+        throw new Error('Password must be at least 8 characters long.')
 
       const user = await userController.createUser(dataSources.userService, {
         email,
@@ -65,10 +65,10 @@ const resolvers = {
         dataSources.userService,
         email
       )
-      if (!user) throw new Error('No user by that email')
+      if (!user) throw new Error('No user by that email.')
 
       const valid = await bcrypt.compare(password, user.password)
-      if (!valid) throw new Error('Incorrect password')
+      if (!valid) throw new Error('Incorrect password.')
 
       return {
         token: JWTtoken.sign(
