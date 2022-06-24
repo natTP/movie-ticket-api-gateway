@@ -3,13 +3,17 @@ import express from 'express'
 import { expressjwt } from 'express-jwt'
 import { resolvers, typeDefs } from './app/schemas/rootSchema'
 import UserService from './app/services/user'
+import ShowtimeService from './app/services/showtime'
 
 const app = express()
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => {
-    return { userService: new UserService() }
+    return {
+      userService: new UserService(),
+      showtimeService: new ShowtimeService(),
+    }
   },
   context: ({ req }) => {
     return {
