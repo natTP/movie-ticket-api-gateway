@@ -3,30 +3,30 @@ import bcrypt from 'bcrypt'
 import JWTtoken from 'jsonwebtoken'
 import userController from '../controllers/user'
 
-const typeDefs = `
-	type User {
-		_id: ID!
-		email: String!
-		password: String!
-	}
+const typeDefs = /* GraphQL */ `
+  type User {
+    _id: ID!
+    email: String!
+    password: String!
+  }
 
-	input UserInput {
-		email: String!
-		password: String!
-	}
+  input UserInput {
+    email: String!
+    password: String!
+  }
 
-	type AuthPayload {
-		token: String!
-	}
+  type AuthPayload {
+    token: String!
+  }
 `
 
-const queries = `
+const queries = /* GraphQL */ `
 	me: User
 `
 
-const mutations = `
-	register(input: UserInput): AuthPayload
-	login(input: UserInput): AuthPayload
+const mutations = /* GraphQL */ `
+	register(input: UserInput!): AuthPayload
+	login(input: UserInput!): AuthPayload
 `
 
 const resolvers = {

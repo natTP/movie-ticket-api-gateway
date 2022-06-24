@@ -31,8 +31,15 @@ async function startServer() {
       secret: process.env.JWT_SECRET,
       algorithms: ['HS256'],
       credentialsRequired: false,
-    })
+    }),
+    (err, req, res, next) => {
+      if (err.name === 'UnauthorizedError') {
+        return next()
+      }
+      return next(err)
+    }
   )
+
   apolloServer.applyMiddleware({ app: app, path: '/graphql' })
 }
 

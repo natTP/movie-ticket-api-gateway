@@ -3,7 +3,6 @@ const getUserList = async (userService) => {
     const response = await userService.getUserList()
     return response
   } catch (error) {
-    // TODO : how to make error message show here
     throw error
   }
 }
