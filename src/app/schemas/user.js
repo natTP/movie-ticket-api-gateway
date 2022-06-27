@@ -53,7 +53,7 @@ const resolvers = {
         token: JWTtoken.sign(
           { _id: user._id, email: user.email },
           process.env.JWT_SECRET,
-          { expiresIn: '1 day' }
+          { expiresIn: '2h' }
         ),
       }
     },
@@ -73,7 +73,7 @@ const resolvers = {
         token: JWTtoken.sign(
           { _id: user._id, email: user.email },
           process.env.JWT_SECRET,
-          { expiresIn: '1 day' }
+          { expiresIn: '2h' }
         ),
       }
     },
