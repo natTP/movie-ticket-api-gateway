@@ -45,7 +45,7 @@ const typedefs = /* GraphQL */ `
 const queries = /* GraphQL */ `
 	getMovieList: MovieListPayload
 	getMovieByID(_id: ID!): Movie
-  getShowtimeListByMovie(movieID: ID!): ShowtimeListPayload
+  getShowtimeListByMovie(movieID: ID!, dateString: String!): ShowtimeListPayload
   getShowtimeByID(_id: ID!): Showtime
   getTheaterByID(_id: ID!): Theater
 `
@@ -66,10 +66,15 @@ const resolvers = {
       )
     },
 
-    getShowtimeListByMovie: async (_, { movieID }, { dataSources }) => {
+    getShowtimeListByMovie: async (
+      _,
+      { movieID, dateString },
+      { dataSources }
+    ) => {
       const data = await showtimeController.getShowtimeListByMovie(
         dataSources.showtimeService,
-        movieID
+        movieID,
+        dateString
       )
       const movie = await showtimeController.getMovieByID(
         dataSources.showtimeService,

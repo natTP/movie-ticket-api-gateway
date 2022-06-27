@@ -16,9 +16,12 @@ const getMovieByID = async (showtimeService, id) => {
   }
 }
 
-const getShowtimeListByMovie = async (showtimeService, movieID) => {
+const getShowtimeListByMovie = async (showtimeService, movieID, dateString) => {
   try {
-    const response = await showtimeService.getShowtimeListByMovie(movieID)
+    const response = await showtimeService.getShowtimeListByMovie(
+      movieID,
+      dateString
+    )
     return response
   } catch (error) {
     throw error

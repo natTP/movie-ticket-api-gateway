@@ -15,8 +15,12 @@ class ShowtimeService extends RESTDataSource {
     return this.get(`/movies/${encodeURIComponent(ID)}`)
   }
 
-  async getShowtimeListByMovie(movieID) {
-    return this.get(`/showtimes/movie/${encodeURIComponent(movieID)}`)
+  async getShowtimeListByMovie(movieID, dateString) {
+    return this.get(
+      `/showtimes/movie/${encodeURIComponent(
+        movieID
+      )}?date=${encodeURIComponent(dateString)}`
+    )
   }
 
   async getShowtimeByID(ID) {
