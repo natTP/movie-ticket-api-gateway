@@ -36,6 +36,19 @@ const getShowtimeByID = async (showtimeService, id) => {
     throw error
   }
 }
+
+const updateShowtimeReservedSeats = async (showtimeService, id, seatData) => {
+  try {
+    const response = await showtimeService.updateShowtimeReservedSeats(
+      id,
+      seatData
+    )
+    return response
+  } catch (error) {
+    throw error
+  }
+}
+
 const getTheaterByID = async (showtimeService, id) => {
   try {
     const response = await showtimeService.getTheaterByID(id)
@@ -50,5 +63,6 @@ export default {
   getMovieByID,
   getShowtimeListByMovie,
   getShowtimeByID,
+  updateShowtimeReservedSeats,
   getTheaterByID,
 }

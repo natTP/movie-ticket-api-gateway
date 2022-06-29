@@ -1,13 +1,14 @@
 import { gql } from 'apollo-server-express'
 import { merge } from 'lodash'
-import showtime from './showtime'
 import user from './user'
+import showtime from './showtime'
+import reservation from './reservation'
 
-const moduleTypeDefs = [user.typeDefs, showtime.typedefs]
+const moduleTypeDefs = [user.typeDefs, showtime.typeDefs, reservation.typeDefs]
 
-const moduleQueries = [user.queries, showtime.queries]
+const moduleQueries = [user.queries, showtime.queries, reservation.queries]
 
-const moduleMutations = [user.mutations]
+const moduleMutations = [user.mutations, reservation.mutations]
 
 const typeDefs = gql`
   ${moduleTypeDefs.join('\n')}
@@ -26,6 +27,10 @@ const typeDefs = gql`
   }
 `
 
-const resolvers = merge(user.resolvers, showtime.resolvers)
+const resolvers = merge(
+  user.resolvers,
+  showtime.resolvers,
+  reservation.resolvers
+)
 
 export { typeDefs, resolvers }

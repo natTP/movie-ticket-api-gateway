@@ -1,6 +1,6 @@
 import showtimeController from '../controllers/showtime'
 
-const typedefs = /* GraphQL */ `
+const typeDefs = /* GraphQL */ `
   type Movie {
     _id: ID!
     name: String!
@@ -116,7 +116,7 @@ const resolvers = {
 }
 
 export default {
-  typedefs,
+  typeDefs,
   queries,
   resolvers,
 }

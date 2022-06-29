@@ -27,6 +27,10 @@ class ShowtimeService extends RESTDataSource {
     return this.get(`/showtimes/${encodeURIComponent(ID)}`)
   }
 
+  async updateShowtimeReservedSeats(ID, seatData) {
+    return this.patch(`/showtimes/${encodeURIComponent(ID)}`, seatData)
+  }
+
   async getTheaterByID(ID) {
     return this.get(`/theaters/${encodeURIComponent(ID)}`)
   }
