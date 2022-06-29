@@ -16,6 +16,7 @@ const typeDefs = /* GraphQL */ `
   }
 
   type AuthPayload {
+    _id: ID!
     token: String!
   }
 `
@@ -50,6 +51,7 @@ const resolvers = {
       })
 
       return {
+        _id: user._id,
         token: JWTtoken.sign(
           { _id: user._id, email: user.email },
           process.env.JWT_SECRET,
@@ -70,6 +72,7 @@ const resolvers = {
       if (!valid) throw new Error('Incorrect password.')
 
       return {
+        _id: user._id,
         token: JWTtoken.sign(
           { _id: user._id, email: user.email },
           process.env.JWT_SECRET,
