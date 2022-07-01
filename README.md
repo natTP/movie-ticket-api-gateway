@@ -19,3 +19,8 @@ See project requirements, architecture, schema and planning here: https://thinkn
 
 ### Schema
 ![Screen Shot 2565-07-01 at 18 11 39](https://user-images.githubusercontent.com/57129145/176883801-80e43e37-cce1-474a-9522-248c8addce3e.png)
+
+### Related repositories
+- [Movie Ticket Frontend](https://github.com/natTP/movie-ticket-frontend)
+- [Movie Ticket API Gateway](https://github.com/natTP/movie-ticket-api-gateway) (This repo)
+- [Movie Ticket Service](https://github.com/natTP/movie-ticket-services) 
